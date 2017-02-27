@@ -3,10 +3,12 @@ package controllers;
 
 import java.time.LocalDate;
 
-import Objects.UserInfo;
+//import Objects.UserInfo;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import components.UserInfo;
+import components.Users;
 
 public class ProfileController  {
 	@FXML
@@ -29,6 +31,9 @@ public class ProfileController  {
 
 	@FXML
 	Label phoneNumber;
+	
+	StartController start;
+	Users users;
 
 
 	UserInfo baertt = new UserInfo("password", "Taylor Baer", LocalDate.now(), "281-740-3405" , "baertt@hendrix.edu"
@@ -47,7 +52,10 @@ public class ProfileController  {
 		//profilePic.setImage(getProfilePic());
 	}
 
-
+	public void importVariables(StartController start) {
+		this.start = start;
+		this.users = start.getUsers();
+	}
 
 
 }

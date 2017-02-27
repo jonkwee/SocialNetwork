@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
@@ -53,7 +54,7 @@
       </MenuBar>
       <MenuBar layoutX="425.0">
          <menus>
-            <Menu mnemonicParsing="false" text="My profile" />
+            <Menu mnemonicParsing="false" onAction="#viewProfile" text="My profile" />
             <Menu mnemonicParsing="false" text="Signout" />
          </menus>
          <cursor>
@@ -111,5 +112,6 @@
             <TextArea editable="false" layoutX="18.0" layoutY="45.0" prefHeight="61.0" prefWidth="536.0" text="Thanks Jack! :-)" />
          </children>
       </Pane>
+      <Button fx:id="myProfile" layoutX="366.0" mnemonicParsing="false" onAction="#viewProfile" text="My Profile" />
    </children>
 </AnchorPane>
