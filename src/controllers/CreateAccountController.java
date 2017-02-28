@@ -81,6 +81,7 @@ public class CreateAccountController {
 
 
 	public void openSignIn(){
+	    
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(GuiMain.class.getResource("SignIn.fxml"));
@@ -96,6 +97,9 @@ public class CreateAccountController {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
+		
+		Stage stage = (Stage) createAccount.getScene().getWindow();
+	    stage.close();
 	}
 
 	@FXML

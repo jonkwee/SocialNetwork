@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project2.ProfileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="404.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProfileController">
    <children>
       <Pane layoutX="-5.0" prefHeight="511.0" prefWidth="417.0" style="-fx-background-color: #84fff0;">
          <children>
@@ -40,7 +40,7 @@
                </font>
             </Label>
             <TextArea fx:id="biography" layoutX="92.0" layoutY="354.0" prefHeight="110.0" prefWidth="238.0" text="Hi, my name is John Smith." />
-            <Button fx:id="edit" layoutX="364.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: #84fff0;" text="Edit">
+            <Button fx:id="edit" layoutX="364.0" layoutY="14.0" mnemonicParsing="false" onAction="#editProfile" style="-fx-background-color: #84fff0;" text="Edit">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -55,6 +55,9 @@ public class SignInController {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
+		
+		Stage stage = (Stage) signIn.getScene().getWindow();
+	    stage.close();
 	}
 
 	@FXML

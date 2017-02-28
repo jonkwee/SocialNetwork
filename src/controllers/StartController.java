@@ -61,6 +61,9 @@ public class StartController {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
+		
+		Stage stage = (Stage) signIn.getScene().getWindow();
+	    stage.close();
 	}
 	
 	public Users getUsers() {
