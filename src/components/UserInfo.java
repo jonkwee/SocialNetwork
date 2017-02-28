@@ -11,7 +11,7 @@ public class UserInfo {
 	private LocalDate bday;
 	private Object avatar;
 
-	public UserInfo(String password, String name, LocalDate bday, String phone, String email /*String biography*/){//, Object object) {
+	public UserInfo(String password, String name, LocalDate bday, String phone, String email/*String biography*/){//, Object object) {
 		this.password = password;
 		this.name = name;
 		this.bday = bday;

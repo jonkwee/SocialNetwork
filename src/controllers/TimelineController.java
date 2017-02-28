@@ -58,7 +58,7 @@ public class TimelineController {
 			AnchorPane root = (AnchorPane) loader.load();
 
 			NewPostController post = (NewPostController) loader.getController();
-			post.importVariables(start);
+			post.importVariables(start, this);
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
