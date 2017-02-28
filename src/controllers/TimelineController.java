@@ -51,6 +51,24 @@ public class TimelineController {
 		}
 	}
 	
+	public void openNewPost(){
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(GuiMain.class.getResource("Post.fxml"));
+			AnchorPane root = (AnchorPane) loader.load();
+
+			NewPostController post = (NewPostController) loader.getController();
+			post.importVariables(start);
+
+			Stage secondStage = new Stage();
+			Scene scene = new Scene(root);
+			secondStage.setScene(scene);
+			secondStage.show();
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+	}
+	
 	public void importVariables(StartController start) {
 		this.start = start;
 		this.users = start.getUsers();
