@@ -24,4 +24,3 @@ public class GuiMain extends Application{
 }
 
 
-// If we want the windows to close as we use them, could that be a method outlined in an interface?

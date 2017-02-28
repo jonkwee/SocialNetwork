@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="304.0" prefWidth="466.0" style="-fx-background-color: #f2ccff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateAccountController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="466.0" style="-fx-background-color: #f2ccff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateAccountController">
    <children>
       <Text layoutX="76.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Jokeltay Account">
          <font>
@@ -69,7 +69,7 @@
          </font>
       </Text>
       <DatePicker fx:id="birthday" layoutX="97.0" layoutY="143.0" prefHeight="31.0" prefWidth="130.0" promptText="01/10/1997" />
-      <Label fx:id="prompt" alignment="CENTER" layoutY="273.0" prefHeight="31.0" prefWidth="466.0" />
+      <Label fx:id="prompt" alignment="CENTER" layoutY="286.0" prefHeight="37.0" prefWidth="466.0" />
       <TextField fx:id="port" layoutX="303.0" layoutY="225.0" prefHeight="25.0" prefWidth="115.0" />
       <TextField fx:id="host" layoutX="97.0" layoutY="225.0" prefHeight="25.0" prefWidth="115.0" />
       <Text fill="#f80a0a" layoutX="216.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
