@@ -116,7 +116,7 @@ public class CreateAccountController {
 	}
 
 	@FXML
-	public void accountCreation(){
+	public void accountCreation() throws IOException{
 		String currentUsername = username.getText();
 		String currentPassword = password.getText();
 		String currentConfirmPass = confirmPass.getText();
@@ -127,8 +127,8 @@ public class CreateAccountController {
 		} else if (!checkPassWordConfirmation(currentPassword, currentConfirmPass)) {
 			prompt.setText("Password and Confirm Password fields are different.");
 		} else {
-			users.add(username.getText(), password.getText(), name.getText(), birthday.getValue(),
-						phone.getText(), email.getText());
+			users.add(username.getText(), password.getText(), name.getText(), phone.getText(),
+					  email.getText(), birthday.getValue());
 			openSignIn();
 		}
 	}

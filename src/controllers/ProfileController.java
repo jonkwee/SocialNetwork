@@ -38,12 +38,12 @@ public class ProfileController  {
 
 	@FXML
 	Label phoneNumber;
-	
+
 	StartController start;
 	Users users;
 
 
-	UserInfo example = new UserInfo("password", "First Last", LocalDate.now(), "123-456-7890" , "example@hendrix.edu");
+	UserInfo example = new UserInfo("password", "First Last", "123-456-7890" , "example@hendrix.edu", LocalDate.now());
 			//"Hello! My name is Taylor. This is my profile.");
 					//, getProfilePic() );
 
@@ -59,7 +59,7 @@ public class ProfileController  {
 		biography.setText(example.getBiography());
 		//profilePic.setImage(getProfilePic());
 	}
-	
+
 	public void openEdit(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -78,14 +78,14 @@ public class ProfileController  {
 			r.setTitle("ERROR");
 			r.showAndWait();
 		}
-		
+
 	}
 
 	@FXML
 	public void editProfile(){
 		openEdit();
 	}
-	
+
 	public void importVariables(StartController start) {
 		this.start = start;
 		this.users = start.getUsers();
