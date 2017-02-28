@@ -11,16 +11,16 @@ public class Users {
 			        String phone, String email /*String biography*/){
 		users.put(username, new UserInfo(password, name, bday, phone, email /*biography*/));
 	}
-	
+
 	/**
 	 * Checks whether username exists in hashtable
 	 * @param  		String username
-	 * @return      boolean 
+	 * @return      boolean
 	 */
 	public boolean checkUserName(String username) {
 		return users.containsKey(username);
 	}
-	
+
 	/**
 	 * Checks whether username and password matches.
 	 * @param  		String username, password
@@ -32,7 +32,7 @@ public class Users {
 			if (info.getPassword().equals(password)) {
 				return true;
 			} else { return false; }
-		} else { return false; }
+		} return false;
 	}
 
 }
