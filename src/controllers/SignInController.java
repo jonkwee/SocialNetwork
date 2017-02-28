@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -53,7 +54,9 @@ public class SignInController {
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			Alert r = new Alert(AlertType.NONE, "Cannot open the timeline." , ButtonType.OK);
+			r.setTitle("ERROR");
+			r.showAndWait();
 		}
 		
 		Stage stage = (Stage) signIn.getScene().getWindow();
