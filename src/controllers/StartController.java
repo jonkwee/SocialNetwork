@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.FileNotFoundException;
+
 //import project2.AddActivityController;
 import components.Users;
 import javafx.fxml.FXML;
@@ -22,10 +24,12 @@ public class StartController {
 	@FXML
 	public void initialize(){
 		users = new Users();
-		// add test User
-		users.add("Bobby", "12345", "Bobby", null, null, null);
 	}
 
+	@FXML
+	public void addExistingUsers() throws FileNotFoundException{
+		users.readFromUserFile(this);
+	}
 	@FXML
 	public void openSignIn(){
 		try {
@@ -64,13 +68,13 @@ public class StartController {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
-		
+
 		Stage stage = (Stage) signIn.getScene().getWindow();
 	    stage.close();
 	}
-	
+
 	public Users getUsers() {
 		return users;
 	}
-	
+
 }

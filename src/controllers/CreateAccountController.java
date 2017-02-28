@@ -47,7 +47,7 @@ public class CreateAccountController {
 	Users users;
 
 	ArrayBlockingQueue<String> messages = new ArrayBlockingQueue<>(20);
-	
+
 	@FXML
 	public void initialize(){
 		new Thread(() -> {
@@ -57,17 +57,17 @@ public class CreateAccountController {
 				} catch (Exception e) {
 					badNews(e.getMessage());
 				}
-				
+
 			}
 		}).start();
 	}
-	
+
 	void badNews(String what) {
 		Alert badNum = new Alert(AlertType.ERROR);
 		badNum.setContentText(what);
 		badNum.show();
 	}
-	
+
 	void send() {
 		try {
 			sendTo(host.getText(), Integer.parseInt(this.port.getText()), null);
@@ -75,7 +75,7 @@ public class CreateAccountController {
 			badNews(String.format("\"%s\" is not an integer", this.port.getText()));
 		}
 	}
-	
+
 	void sendTo(String host, int port, String message) {
 		new Thread(() -> {
 			try {
@@ -89,13 +89,13 @@ public class CreateAccountController {
 			}
 		}).start();
 	}
-	
+
 	void send(Socket target, String message) throws IOException {
 		PrintWriter sockout = new PrintWriter(target.getOutputStream());
 		sockout.println(message);
-		sockout.flush();		
+		sockout.flush();
 	}
-	
+
 	void receive(Socket target) throws IOException {
 		BufferedReader sockin = new BufferedReader(new InputStreamReader(target.getInputStream()));
 		while (!sockin.ready()) {}
@@ -107,7 +107,7 @@ public class CreateAccountController {
 				Platform.runLater(() -> badNews(e.getMessage()));
 				e.printStackTrace();
 			}
-		}		
+		}
 	}
 
 	public void getStart(StartController start){
@@ -116,7 +116,7 @@ public class CreateAccountController {
 	}
 
 	@FXML
-	public void accountCreation(){
+	public void accountCreation() throws IOException{
 		String currentUsername = username.getText();
 		String currentPassword = password.getText();
 		String currentConfirmPass = confirmPass.getText();
@@ -129,14 +129,12 @@ public class CreateAccountController {
 		} else if (!checkPassWordConfirmation(currentPassword, currentConfirmPass)) {
 			prompt.setText("Password and Confirm Password fields are different.");
 		} else {
-			users.add(username.getText(), password.getText(), name.getText(), birthday.getValue(),
-						phone.getText(), email.getText());
+			users.add(username.getText(), password.getText(), name.getText(), phone.getText(),
+					  email.getText(), birthday.getValue());
 			openSignIn();
 		}
 	}
-	
 
-	
 	/**
 	 * Checks if required values are filled
 	 * @param  		String username, password, confirmPassword
@@ -145,7 +143,7 @@ public class CreateAccountController {
 	public boolean requiredNotFilled(String username, String password, String confirmPassword, String host, String port) {
 		return (username.equals("")) || (password.equals("")) || (confirmPassword.equals("") || (host.equals("")) || (port.equals("")));
 	}
-	
+
 	/**
 	 * Checks if password and confirm password are the same.
 	 * @param  		String password, confirmPassword
@@ -157,12 +155,12 @@ public class CreateAccountController {
 
 
 	public void openSignIn(){
-	    
+
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(GuiMain.class.getResource("SignIn.fxml"));
 			AnchorPane root = (AnchorPane) loader.load();
-			
+
 			SignInController signIn = (SignInController) loader.getController();
 			signIn.importVariables(start);
 
@@ -173,7 +171,7 @@ public class CreateAccountController {
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
-		
+
 		Stage stage = (Stage) createAccount.getScene().getWindow();
 	    stage.close();
 	}
