@@ -120,9 +120,7 @@ public class CreateAccountController {
 		String currentUsername = username.getText();
 		String currentPassword = password.getText();
 		String currentConfirmPass = confirmPass.getText();
-		String currentHost = host.getText();
-		String currentPort = port.getText();
-		if (requiredNotFilled(currentUsername, currentPassword, currentConfirmPass, currentHost, currentPort)) {
+		if (requiredNotFilled(currentUsername, currentPassword, currentConfirmPass)) {
 			prompt.setText("Please fill in the required fields!"); 
 		} else if (users.checkUserName(currentUsername)) {
 			prompt.setText("This username has already been chosen. Please choose another one.");
@@ -140,8 +138,8 @@ public class CreateAccountController {
 	 * @param  		String username, password, confirmPassword
 	 * @return      boolean (if at least one default value is not filled, returns True)
 	 */
-	public boolean requiredNotFilled(String username, String password, String confirmPassword, String host, String port) {
-		return (username.equals("")) || (password.equals("")) || (confirmPassword.equals("") || (host.equals("")) || (port.equals("")));
+	public boolean requiredNotFilled(String username, String password, String confirmPassword) {
+		return (username.equals("")) || (password.equals("")) || (confirmPassword.equals(""));
 	}
 
 	/**

@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TimelineController">
    <children>
       <VBox prefHeight="46.0" prefWidth="503.0" AnchorPane.bottomAnchor="553.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -19,14 +18,14 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Post">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Text Message" />
-                              <MenuItem mnemonicParsing="false" text="Image" />
+                            <MenuItem mnemonicParsing="false" onAction="#openNewPost" text="Text Message" />
+                              <MenuItem mnemonicParsing="false" onAction="#openNewPost" text="Image" />
                           </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Profile">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="View" />
-                              <MenuItem mnemonicParsing="false" text="Edit" />
+                              <MenuItem mnemonicParsing="false" onAction="#viewProfile" text="View" />
+                              <MenuItem mnemonicParsing="false" onAction="#viewProfile" text="Edit" />
                               <MenuItem mnemonicParsing="false" text="Log Out" />
                            </items>
                         </Menu>
@@ -38,7 +37,7 @@
       </VBox>
       <VBox layoutY="43.0" prefHeight="556.0" prefWidth="503.0">
          <children>
-            <ListView prefHeight="559.0" prefWidth="503.0" />
+            <ListView fx:id="messageView" prefHeight="559.0" prefWidth="503.0" />
          </children>
       </VBox>
    </children>

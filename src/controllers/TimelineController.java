@@ -1,12 +1,15 @@
 package controllers;
 
 import components.Users;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Alert.AlertType;
@@ -27,9 +30,17 @@ public class TimelineController {
 	@FXML
 	Button myProfile;
 	
+	@FXML 
+	ListView<String> messageView;
+	
+	ObservableList<String> messageList;
 	
 	@FXML
-	public void initialize(){}
+	public void initialize(){
+		messageList = FXCollections.observableArrayList();
+		System.out.println(messageList.equals(null));
+		addMessage("Hi");
+	}
 	
 	@FXML
 	public void viewProfile(){
@@ -77,5 +88,10 @@ public class TimelineController {
 	public void importVariables(StartController start) {
 		this.start = start;
 		this.users = start.getUsers();
+	}
+	
+	public void addMessage(String msg) {
+		messageList.add(msg);
+		messageView.setItems(messageList);
 	}
 }

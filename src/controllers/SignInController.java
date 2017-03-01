@@ -43,7 +43,7 @@ public class SignInController {
 	public void openTimeline(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(GuiMain.class.getResource("Timeline.fxml"));
+			loader.setLocation(GuiMain.class.getResource("TimelineVer2.fxml"));
 			AnchorPane root = (AnchorPane) loader.load();
 
 			TimelineController timeline = (TimelineController) loader.getController();
@@ -57,6 +57,7 @@ public class SignInController {
 			Alert r = new Alert(AlertType.NONE, "Cannot open the timeline." , ButtonType.OK);
 			r.setTitle("ERROR");
 			r.showAndWait();
+			exc.printStackTrace();
 		}
 		
 		Stage stage = (Stage) signIn.getScene().getWindow();

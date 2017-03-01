@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="466.0" style="-fx-background-color: #f2ccff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateAccountController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="306.0" prefWidth="466.0" style="-fx-background-color: #f2ccff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateAccountController">
    <children>
       <Text layoutX="76.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Jokeltay Account">
          <font>
@@ -30,8 +30,8 @@
          </font>
       </Text>
       <PasswordField fx:id="password" layoutX="97.0" layoutY="101.0" prefHeight="25.0" prefWidth="115.0" />
-      <Button fx:id="createAccount" layoutX="106.0" layoutY="261.0" mnemonicParsing="false" onAction="#accountCreation" text="Create Account" />
-      <Button fx:id="cancel" layoutX="334.0" layoutY="263.0" mnemonicParsing="false" onAction="#close" text="Cancel" />
+      <Button fx:id="createAccount" layoutX="101.0" layoutY="232.0" mnemonicParsing="false" onAction="#accountCreation" text="Create Account" />
+      <Button fx:id="cancel" layoutX="329.0" layoutY="232.0" mnemonicParsing="false" onAction="#close" text="Cancel" />
       <TextField fx:id="name" layoutX="303.0" layoutY="62.0" prefHeight="25.0" prefWidth="115.0" promptText="John Smith" />
       <Text layoutX="251.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
          <font>
@@ -69,20 +69,6 @@
          </font>
       </Text>
       <DatePicker fx:id="birthday" layoutX="97.0" layoutY="143.0" prefHeight="31.0" prefWidth="130.0" promptText="01/10/1997" />
-      <Label fx:id="prompt" alignment="CENTER" layoutY="286.0" prefHeight="37.0" prefWidth="466.0" />
-      <TextField fx:id="port" layoutX="303.0" layoutY="225.0" prefHeight="25.0" prefWidth="115.0" />
-      <TextField fx:id="host" layoutX="97.0" layoutY="225.0" prefHeight="25.0" prefWidth="115.0" />
-      <Text fill="#f80a0a" layoutX="216.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
-      <Text fill="#f80a0a" layoutX="422.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
-      <Text layoutX="56.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Host:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <Text layoutX="263.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
+      <Label fx:id="prompt" alignment="CENTER" layoutY="263.0" prefHeight="31.0" prefWidth="466.0" />
    </children>
 </AnchorPane>
