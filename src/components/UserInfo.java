@@ -58,7 +58,7 @@ public class UserInfo {
 
 	@Override
 	public String toString(){
-		return(String.format("%s,%s,%s,%s,%s", password, name, phone, email, bday.toString()));
+		return(String.format("%s,%s,%s,%s,%s", password, name, phone, email, bday == null ? "" : bday.toString()));
 	}
 
 	@Override

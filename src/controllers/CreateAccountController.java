@@ -127,6 +127,13 @@ public class CreateAccountController {
 		} else if (!checkPassWordConfirmation(currentPassword, currentConfirmPass)) {
 			prompt.setText("Password and Confirm Password fields are different.");
 		} else {
+			System.out.println(users);
+			System.out.println(username.getText());
+			System.out.println(password.getText());
+			System.out.println(name.getText());
+			System.out.println(phone.getText());
+			System.out.println(email.getText());
+			System.out.println(birthday.getValue());
 			users.add(username.getText(), password.getText(), name.getText(), phone.getText(),
 					  email.getText(), birthday.getValue());
 			openSignIn();
