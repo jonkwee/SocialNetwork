@@ -24,6 +24,11 @@ public class StartController {
 	@FXML
 	public void initialize(){
 		users = new Users();
+		try {
+			addExistingUsers();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML

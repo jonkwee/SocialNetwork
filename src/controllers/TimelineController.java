@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.List;
+
+import components.UserInfo;
 import components.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +37,7 @@ public class TimelineController {
 	ListView<String> messageView;
 	
 	ObservableList<String> messageList;
+	List<String> currentUser;
 	
 	@FXML
 	public void initialize(){
@@ -54,13 +58,17 @@ public class TimelineController {
 			AnchorPane root = (AnchorPane) loader.load();
 
 			ProfileController profile = (ProfileController) loader.getController();
-			profile.importVariables(start);
+			profile.importVariables(start, this);
+			profile.setProfile(currentUser.get(1), currentUser.get(4), currentUser.get(3), currentUser.get(2));
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (Exception exc) {
+			Alert r = new Alert(AlertType.NONE, "Cannot view Profile." , ButtonType.OK);
+			r.setTitle("ERROR");
+			r.showAndWait();
 			exc.printStackTrace();
 		}
 	}
@@ -72,7 +80,7 @@ public class TimelineController {
 			AnchorPane root = (AnchorPane) loader.load();
 
 			NewPostController post = (NewPostController) loader.getController();
-			post.importVariables(start);
+			post.importVariables(start,this);
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
@@ -82,16 +90,28 @@ public class TimelineController {
 			Alert r = new Alert(AlertType.NONE, "Cannot create a new post." , ButtonType.OK);
 			r.setTitle("ERROR");
 			r.showAndWait();
+			exc.printStackTrace();
 		}
 	}
 	
-	public void importVariables(StartController start) {
+	public void importVariables(StartController start, List<String> currentUser) {
 		this.start = start;
 		this.users = start.getUsers();
+		this.currentUser = currentUser;
 	}
 	
+	
+	/**
+	 * Adds Message into listview
+	 * @param  		String message
+	 * @return      None
+	 */
 	public void addMessage(String msg) {
 		messageList.add(msg);
 		messageView.setItems(messageList);
+	}
+	
+	public List<String> getCurrentUserInfo() {
+		return currentUser;
 	}
 }

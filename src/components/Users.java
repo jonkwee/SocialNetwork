@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Scanner;
 
 import controllers.StartController;
@@ -73,5 +75,11 @@ public class Users {
 				return true;
 			} else { return false; }
 		} return false;
+	}
+	
+	public List<String> getCurrentUser(String username) {
+		UserInfo info = users.get(username);
+		List<String> userInfoList = Arrays.asList(info.toString().split(","));
+		return userInfoList;
 	}
 }

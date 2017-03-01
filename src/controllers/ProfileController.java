@@ -2,6 +2,7 @@ package controllers;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javafx.event.Event;
 //import Objects.UserInfo;
@@ -41,7 +42,7 @@ public class ProfileController  {
 
 	StartController start;
 	Users users;
-
+	TimelineController timeline;
 
 	UserInfo example = new UserInfo("password", "First Last", "123-456-7890" , "example@hendrix.edu", LocalDate.now());
 			//"Hello! My name is Taylor. This is my profile.");
@@ -51,13 +52,23 @@ public class ProfileController  {
 
 	@FXML
 	public void initialize(){
+//		List<String> currentUser = timeline.getCurrentUserInfo();
 		biography.setEditable(false);
-		name.setText(example.getName());
-		birthday.setText("Birthday:" + " " + example.getBday());
-		email.setText("Email: " + " " + example.getEmail());
-		phoneNumber.setText("Phone Number: " + " " + example.getPhone());
-		biography.setText(example.getBiography());
+//		name.setText(currentUser.get(1));
+//		birthday.setText("Birthday:" + " " + currentUser.get(4));
+//		email.setText("Email: " + " " + currentUser.get(3));
+//		phoneNumber.setText("Phone Number: " + " " + currentUser.get(2));
+		//biography.setText(currentUser.getBiography());
 		//profilePic.setImage(getProfilePic());
+	}
+	
+	public void setProfile(String name, String birthday, String email, String phoneNumber) {
+		this.name.setText(name);
+		this.birthday.setText(birthday);
+		this.email.setText(email);
+		this.phoneNumber.setText(phoneNumber);
+		this.biography.setText("My name is " + name + "! Please view my profile!");
+
 	}
 
 	public void openEdit(){
@@ -86,9 +97,10 @@ public class ProfileController  {
 		openEdit();
 	}
 
-	public void importVariables(StartController start) {
+	public void importVariables(StartController start, TimelineController timeline) {
 		this.start = start;
 		this.users = start.getUsers();
+		this.timeline = timeline;
 	}
 
 

@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.List;
+
+import components.UserInfo;
 import components.Users;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +26,7 @@ public class SignInController {
 
 	StartController start;
 	Users users;
+	List<String> currentUser;
 
 	@FXML
 	public void initialize(){}
@@ -35,6 +39,7 @@ public class SignInController {
 		if (!userExist) {
 			prompt.setText("Username or Password doesn't exist");
 		} else {
+			currentUser = users.getCurrentUser(currentUsername);
 			openTimeline();
 		}
 	}
@@ -47,7 +52,7 @@ public class SignInController {
 			AnchorPane root = (AnchorPane) loader.load();
 
 			TimelineController timeline = (TimelineController) loader.getController();
-			timeline.importVariables(start);
+			timeline.importVariables(start, currentUser);
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
