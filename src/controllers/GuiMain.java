@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +21,15 @@ public class GuiMain extends Application{
 	}
 
 	public static void main(String[] args){
+		Thread serverThread = new Thread(() -> {
+			try{ 
+				Server s = new Server(8880);
+				s.listen();
+			} catch(IOException e){
+				 e.printStackTrace();
+			}
+			});
+		serverThread.start();
 		launch(args);
 	}
 }
