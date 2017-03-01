@@ -117,9 +117,16 @@ public class CreateAccountController {
 
 	@FXML
 	public void accountCreation() throws IOException{
+		// Required fields
+		try {
 		String currentUsername = username.getText();
 		String currentPassword = password.getText();
 		String currentConfirmPass = confirmPass.getText();
+		// Not Required fields
+		String currentName = (name.getText().equals(""))?"null":name.getText();
+		String currentPhone = (phone.getText().equals(""))?"null":phone.getText();
+		String currentEmail = (email.getText().equals(""))?"null":email.getText();
+		String currentBirthday = (birthday.getValue() == null)?"null":"" + birthday.getValue();
 		if (requiredNotFilled(currentUsername, currentPassword, currentConfirmPass)) {
 			prompt.setText("Please fill in the required fields!"); 
 		} else if (users.checkUserName(currentUsername)) {
@@ -134,9 +141,12 @@ public class CreateAccountController {
 			System.out.println(phone.getText());
 			System.out.println(email.getText());
 			System.out.println(birthday.getValue());
-			users.add(username.getText(), password.getText(), name.getText(), phone.getText(),
-					  email.getText(), birthday.getValue());
+			users.add(currentUsername, currentPassword, currentName, currentPhone,
+					  currentEmail, currentBirthday);
 			openSignIn();
+		}
+		} catch (Exception exc) {
+			exc.printStackTrace();
 		}
 	}
 

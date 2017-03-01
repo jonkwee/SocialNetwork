@@ -5,11 +5,10 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 
 public class UserInfo {
-	private String password, name, phone, email, biography;
-	private LocalDate bday;
+	private String password, name, phone, email, biography, bday;
 	private Object avatar;
 
-	public UserInfo(String password, String name, String phone, String email, LocalDate bday /*String biography*/){//, Object object) {
+	public UserInfo(String password, String name, String phone, String email, String bday /*String biography*/){//, Object object) {
 		this.password = password;
 		this.name = name;
 		this.bday = bday;
@@ -24,7 +23,7 @@ public class UserInfo {
 	public String getName(){return this.name;}
 	public String getPhone(){return this.phone;}
 	public String getEmail(){return this.email;}
-	public LocalDate getBday(){return this.bday;}
+	public String getBday(){return this.bday;}
 	public String getBiography(){return this.biography;}
 	public Object getAvatar(){return this.avatar;}
 
@@ -44,7 +43,7 @@ public class UserInfo {
 		email = newEmail;
 	}
 
-	public void setBday(LocalDate newBday) {
+	public void setBday(String newBday) {
 		bday = newBday;
 	}
 

@@ -44,7 +44,7 @@ public class ProfileController  {
 	Users users;
 	TimelineController timeline;
 
-	UserInfo example = new UserInfo("password", "First Last", "123-456-7890" , "example@hendrix.edu", LocalDate.now());
+	//UserInfo example = new UserInfo("password", "First Last", "123-456-7890" , "example@hendrix.edu", LocalDate.now());
 			//"Hello! My name is Taylor. This is my profile.");
 					//, getProfilePic() );
 

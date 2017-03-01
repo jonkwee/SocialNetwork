@@ -26,7 +26,7 @@ public class Users {
 	 * @throws IOException
 	 */
 	public void add(String username, String password, String name, String phone, String email,
-					LocalDate bday /*String biography*/) throws IOException{
+					String bday /*String biography*/) throws IOException{
 		for(String user: users.keySet()){System.out.println(user + users.get(user).toString());}
 		users.put(username, new UserInfo(password, name, phone, email, bday /*biography*/));
 		for(String user: users.keySet()){System.out.println(user + users.get(user).toString());}
@@ -48,11 +48,19 @@ public class Users {
 		Scanner in = new Scanner(new File("users.txt"));
 		while (in.hasNextLine()) {
 			String line = in.nextLine();
-			String[] parts = line.split(",");
-			start.getUsers().users.put(parts[0], new UserInfo(parts[1], parts[2], parts[3], parts[4],
-									   LocalDate.parse(parts[5])));
+			List<String> lineParts = Arrays.asList(line.split(","));
+			//String[] parts = line.split(",");
+			//start.getUsers().users.put(parts[0], new UserInfo(parts[1], parts[2], parts[3], parts[4],
+			//						   parts[5]));
+			
+			start.getUsers().users.put(lineParts.get(0), new UserInfo(lineParts.get(1), lineParts.get(2), lineParts.get(3),
+					lineParts.get(4), lineParts.get(5)));
+			//(parts[5].equals("null"))?null:LocalDate.parse(parts[5]))
+			
+			//password, String name, String phone, String email, LocalDate bday
 		}
 		in.close();
+		//printKeys();
 	}
 	/**
 	 * Checks whether username exists in hashtable
@@ -81,5 +89,17 @@ public class Users {
 		UserInfo info = users.get(username);
 		List<String> userInfoList = Arrays.asList(info.toString().split(","));
 		return userInfoList;
+	}
+	
+	public void printKeys() {
+		for (String key: users.keySet()) {
+			System.out.println(key);
+			printValues(key);
+		}
+	}
+	
+	public void printValues(String key) {
+		UserInfo info = users.get(key);
+		System.out.println(info.toString());
 	}
 }
