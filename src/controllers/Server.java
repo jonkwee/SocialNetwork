@@ -10,9 +10,15 @@ import java.net.Socket;
 public class Server {
 
 	public static void main(String[] args) throws IOException {
-		Server s = new Server(Integer.parseInt(args[0]));
-		s.listen();
-	}
+		Thread serverThread = new Thread(() -> {
+			try{ 
+				Server s = new Server(Integer.parseInt(args[0]));
+				s.listen();
+			} catch(IOException e){
+				 e.printStackTrace();
+			}
+			});
+		}
 	
 	private ServerSocket accepter;
 
