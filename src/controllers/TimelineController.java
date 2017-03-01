@@ -4,9 +4,12 @@ import components.Users;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -65,7 +68,9 @@ public class TimelineController {
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			Alert r = new Alert(AlertType.NONE, "Cannot create a new post." , ButtonType.OK);
+			r.setTitle("ERROR");
+			r.showAndWait();
 		}
 	}
 	

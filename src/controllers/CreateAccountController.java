@@ -1,10 +1,19 @@
 package controllers;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.concurrent.ArrayBlockingQueue;
+
 import components.Users;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -29,12 +38,77 @@ public class CreateAccountController {
 	Button cancel;
 	@FXML
 	Label prompt;
+	@FXML
+	TextField host;
+	@FXML
+	TextField port;
 
 	StartController start;
 	Users users;
 
+	ArrayBlockingQueue<String> messages = new ArrayBlockingQueue<>(20);
+	
 	@FXML
-	public void initialize(){}
+	public void initialize(){
+		new Thread(() -> {
+			for (;;) {
+				try {
+					String msg = messages.take();
+				} catch (Exception e) {
+					badNews(e.getMessage());
+				}
+				
+			}
+		}).start();
+	}
+	
+	void badNews(String what) {
+		Alert badNum = new Alert(AlertType.ERROR);
+		badNum.setContentText(what);
+		badNum.show();
+	}
+	
+	void send() {
+		try {
+			sendTo(host.getText(), Integer.parseInt(this.port.getText()), null);
+		} catch (NumberFormatException nfe) {
+			badNews(String.format("\"%s\" is not an integer", this.port.getText()));
+		}
+	}
+	
+	void sendTo(String host, int port, String message) {
+		new Thread(() -> {
+			try {
+				Socket target = new Socket(host, port);
+				send(target, message);
+				receive(target);
+				target.close();
+			} catch (Exception e) {
+				Platform.runLater(() -> badNews(e.getMessage()));
+				e.printStackTrace();
+			}
+		}).start();
+	}
+	
+	void send(Socket target, String message) throws IOException {
+		PrintWriter sockout = new PrintWriter(target.getOutputStream());
+		sockout.println(message);
+		sockout.flush();		
+	}
+	
+	void receive(Socket target) throws IOException {
+		BufferedReader sockin = new BufferedReader(new InputStreamReader(target.getInputStream()));
+		while (!sockin.ready()) {}
+		while (sockin.ready()) {
+			try {
+				String msg = sockin.readLine();
+				messages.put(msg);
+			} catch (Exception e) {
+				Platform.runLater(() -> badNews(e.getMessage()));
+				e.printStackTrace();
+			}
+		}		
+	}
 
 	public void getStart(StartController start){
 		this.start = start;

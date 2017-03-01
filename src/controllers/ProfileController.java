@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -73,7 +74,9 @@ public class ProfileController  {
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (Exception exc) {
-			exc.printStackTrace();
+			Alert r = new Alert(AlertType.NONE, "Cannot open the edit page." , ButtonType.OK);
+			r.setTitle("ERROR");
+			r.showAndWait();
 		}
 		
 	}
