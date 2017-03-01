@@ -64,9 +64,9 @@ public class ProfileController  {
 	
 	public void setProfile(String name, String birthday, String email, String phoneNumber) {
 		this.name.setText(name);
-		this.birthday.setText(birthday);
-		this.email.setText(email);
-		this.phoneNumber.setText(phoneNumber);
+		this.birthday.setText("Birthday: " + birthday);
+		this.email.setText("Email: " + email);
+		this.phoneNumber.setText("Phone Number: " + phoneNumber);
 		this.biography.setText("My name is " + name + "! Please view my profile!");
 
 	}
@@ -78,7 +78,11 @@ public class ProfileController  {
 			AnchorPane root = (AnchorPane) loader.load();
 
 			EditProfileController editProfile = (EditProfileController) loader.getController();
-			editProfile.importVariables(start);
+			editProfile.importVariables(start, timeline);
+			editProfile.prePopulate((timeline.currentUser.get(0).equals("null"))?"":timeline.currentUser.get(0), 
+					(timeline.currentUser.get(2).equals("null"))?"":timeline.currentUser.get(2),
+							(timeline.currentUser.get(3).equals("null"))?"":timeline.currentUser.get(3),
+									(timeline.currentUser.get(4).equals("null"))?"":timeline.currentUser.get(4), "");
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);

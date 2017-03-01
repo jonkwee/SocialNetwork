@@ -87,7 +87,8 @@ public class Users {
 	
 	public List<String> getCurrentUser(String username) {
 		UserInfo info = users.get(username);
-		List<String> userInfoList = Arrays.asList(info.toString().split(","));
+		List<String> userInfoList = Arrays.asList((username + "," + info.toString()).split(",")); //(username + "," + info.toString()).split(",")
+		System.out.println(userInfoList);
 		return userInfoList;
 	}
 	

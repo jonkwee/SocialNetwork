@@ -59,7 +59,10 @@ public class TimelineController {
 
 			ProfileController profile = (ProfileController) loader.getController();
 			profile.importVariables(start, this);
-			profile.setProfile(currentUser.get(1), currentUser.get(4), currentUser.get(3), currentUser.get(2));
+			profile.setProfile((currentUser.get(2).equals("null"))?"":currentUser.get(2),
+					(currentUser.get(5).equals("null"))?"":currentUser.get(5),
+							(currentUser.get(4).equals("null"))?"":currentUser.get(4),
+									(currentUser.get(3).equals("null"))?"":currentUser.get(3));
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
@@ -73,6 +76,31 @@ public class TimelineController {
 		}
 	}
 	
+	
+	public void openEditProfile(){
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(GuiMain.class.getResource("EditInfo.fxml"));
+			AnchorPane root = (AnchorPane) loader.load();
+
+			EditProfileController editProfile = (EditProfileController) loader.getController();
+			editProfile.importVariables(start, this);
+			editProfile.prePopulate((currentUser.get(0).equals("null"))?"":currentUser.get(0), 
+					(currentUser.get(2).equals("null"))?"":currentUser.get(2),
+							(currentUser.get(3).equals("null"))?"":currentUser.get(3),
+									(currentUser.get(4).equals("null"))?"":currentUser.get(4), "");
+
+			Stage secondStage = new Stage();
+			Scene scene = new Scene(root);
+			secondStage.setScene(scene);
+			secondStage.show();
+		} catch (Exception exc) {
+			Alert r = new Alert(AlertType.NONE, "Cannot view Profile." , ButtonType.OK);
+			r.setTitle("ERROR");
+			r.showAndWait();
+			exc.printStackTrace();
+		}
+	}
 	public void openNewPost(){
 		try {
 			FXMLLoader loader = new FXMLLoader();

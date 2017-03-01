@@ -1,4 +1,6 @@
 b,b,Bobby,5013211234,Bobby@hendrix.edu,2017-02-15
+J,12345,null,null,null,null
+Jonathan,12345,null,5016235932,notarealemail@gmail.com,null
 kd,1234,Kelsey,null,null,null
 Jo,123,null,null,null,null
 ae,bb,null,null,null,null

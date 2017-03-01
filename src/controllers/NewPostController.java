@@ -43,7 +43,7 @@ public class NewPostController {
 		@FXML
 		public void post() {
 			String msg = textArea.getText();
-			timeline.addMessage(msg);
+			timeline.addMessage(timeline.getCurrentUserInfo().get(0) + ": " + msg);
 			// TO-DO
 			// Add networking code
 			// Send msg to other apps too!

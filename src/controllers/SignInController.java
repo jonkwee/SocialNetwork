@@ -53,6 +53,7 @@ public class SignInController {
 
 			TimelineController timeline = (TimelineController) loader.getController();
 			timeline.importVariables(start, currentUser);
+			
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
