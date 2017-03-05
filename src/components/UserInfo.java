@@ -5,15 +5,17 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 
 public class UserInfo {
-	private String password, name, phone, email, biography, bday;
+	private String password, name, phone, email, biography, bday, host, port;
 	private Object avatar;
 
-	public UserInfo(String password, String name, String phone, String email, String bday /*String biography*/){//, Object object) {
+	public UserInfo(String password, String name, String phone, String email, String bday, String host, String port /*String biography*/){//, Object object) {
 		this.password = password;
 		this.name = name;
 		this.bday = bday;
 		this.phone = phone;
 		this.email = email;
+		this.host = host;
+		this.port = port;
 		//this.biography = biography; comment out because haven't implement in GUI
 		//this.avatar = object;
 	}
@@ -26,6 +28,8 @@ public class UserInfo {
 	public String getBday(){return this.bday;}
 	public String getBiography(){return this.biography;}
 	public Object getAvatar(){return this.avatar;}
+	public String getHost(){return this.host;}
+	public String getPort(){return this.port;}
 
 	public void setPassword(String newPassword) {
 		password = newPassword;
@@ -51,13 +55,21 @@ public class UserInfo {
 		biography = newBiography;
 	}
 
+	public void setHost(String newHost){
+		host = newHost;
+	}
+
+	public void setPort(String newPort){
+		port = newPort;
+	}
+
 	public void setAvatar(Object newAvatar) {
 		avatar = newAvatar;
 	}
 
 	@Override
 	public String toString(){
-		return(String.format("%s,%s,%s,%s,%s", password, name, phone, email, bday == null ? "" : bday.toString()));
+		return(String.format("%s,%s,%s,%s,%s,%s,%s", password, name, phone, email, (bday == null ? "" : bday.toString()), host, port));
 	}
 
 	@Override

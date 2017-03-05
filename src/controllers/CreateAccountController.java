@@ -50,7 +50,7 @@ public class CreateAccountController {
 
 	@FXML
 	public void initialize(){
-		new Thread(() -> {
+		/*new Thread(() -> {
 			for (;;) {
 				try {
 					String msg = messages.take();
@@ -59,10 +59,10 @@ public class CreateAccountController {
 				}
 
 			}
-		}).start();
+		}).start();*/
 	}
 
-	void badNews(String what) {
+/*	void badNews(String what) {
 		Alert badNum = new Alert(AlertType.ERROR);
 		badNum.setContentText(what);
 		badNum.show();
@@ -108,7 +108,7 @@ public class CreateAccountController {
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 
 	public void getStart(StartController start){
 		this.start = start;
@@ -127,8 +127,10 @@ public class CreateAccountController {
 		String currentPhone = (phone.getText().equals(""))?"null":phone.getText();
 		String currentEmail = (email.getText().equals(""))?"null":email.getText();
 		String currentBirthday = (birthday.getValue() == null)?"null":"" + birthday.getValue();
+		String currentHost = (host.getText().equals(""))?"null":name.getText();
+		String currentPort = (port.getText().equals(""))?"null":name.getText();
 		if (requiredNotFilled(currentUsername, currentPassword, currentConfirmPass)) {
-			prompt.setText("Please fill in the required fields!"); 
+			prompt.setText("Please fill in the required fields!");
 		} else if (users.checkUserName(currentUsername)) {
 			prompt.setText("This username has already been chosen. Please choose another one.");
 		} else if (!checkPassWordConfirmation(currentPassword, currentConfirmPass)) {
@@ -141,8 +143,10 @@ public class CreateAccountController {
 			System.out.println(phone.getText());
 			System.out.println(email.getText());
 			System.out.println(birthday.getValue());
+			System.out.println(host.getText());
+			System.out.println(port.getText());
 			users.add(currentUsername, currentPassword, currentName, currentPhone,
-					  currentEmail, currentBirthday);
+					  currentEmail, currentBirthday, currentHost, currentPort);
 			openSignIn();
 		}
 		} catch (Exception exc) {
