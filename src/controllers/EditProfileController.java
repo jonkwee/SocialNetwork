@@ -13,42 +13,50 @@ import components.UserInfo;
 import components.Users;
 
 public class EditProfileController  {
-	
+
 	StartController start;
 	Users users;
 	TimelineController timeline;
 
 	@FXML
+	Button saveChanges;
+
+	@FXML
 	Button cancel;
-	
+
 	@FXML
 	TextField username;
-	
+
 	@FXML
 	TextField name;
-	
+
 	@FXML
 	TextField password;
-	
+
 	@FXML
 	TextField confirmPass;
-	
+
 	@FXML
 	DatePicker birthday;
-	
+
 	@FXML
 	TextField phone;
-	
+
 	@FXML
 	TextField email;
-	
+
 	@FXML
 	TextArea bio;
-	
-	
+
+
 
 	@FXML
 	public void initialize(){
+	}
+
+	@FXML
+	public void saveChanges(){
+
 	}
 
 	@FXML
@@ -56,13 +64,13 @@ public class EditProfileController  {
 	    Stage stage = (Stage) cancel.getScene().getWindow();
 	    stage.close();
 	}
-	
+
 	public void importVariables(StartController start, TimelineController timeline) {
 		this.start = start;
 		this.users = start.getUsers();
 		this.timeline = timeline;
 	}
-	
+
 	public void prePopulate(String username, String name, String phone,
 			String email, String bio) {
 		this.username.setText(username);
@@ -71,6 +79,7 @@ public class EditProfileController  {
 		this.email.setText(email);
 		this.bio.setText(bio);
 	}
+
 
 
 }
