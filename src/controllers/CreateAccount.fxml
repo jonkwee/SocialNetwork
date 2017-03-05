@@ -66,7 +66,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <DatePicker fx:id="birthday" layoutX="97.0" layoutY="143.0" prefHeight="31.0" prefWidth="130.0" promptText="01/10/1997" />
+      <DatePicker fx:id="birthday" layoutX="97.0" layoutY="143.0" prefHeight="31.0" prefWidth="130.0" promptText="01/01/1990" />
       <Label fx:id="prompt" alignment="CENTER" layoutY="263.0" prefHeight="31.0" prefWidth="466.0" />
       <TextField fx:id="phone" layoutX="304.0" layoutY="144.0" prefHeight="25.0" prefWidth="115.0" />
       <TextField fx:id="email" layoutX="97.0" layoutY="188.0" prefHeight="31.0" prefWidth="318.0" />
