@@ -1,9 +1,18 @@
 package controllers;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+
+import com.sun.corba.se.spi.activation.Server;
 
 import components.UserInfo;
 import components.Users;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,37 +29,97 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class TimelineController {
-	
+
 	StartController start;
 	Users users;
-	
+
 	/*@FXML
 	Menu myProfile;
-	
+
 	@FXML
 	MenuBar profileItems;*/
-	
+
+	//@FXML
+	//Button myProfile;
+
 	@FXML
-	Button myProfile;
-	
-	@FXML 
 	ListView<String> messageView;
-	
+
 	ObservableList<String> messageList;
 	List<String> currentUser;
-	
+
+	ArrayBlockingQueue<String> messages = new ArrayBlockingQueue<>(20);
+
+
 	@FXML
 	public void initialize(){
 		messageList = FXCollections.observableArrayList();
 		System.out.println(messageList.equals(null));
-		addMessage("Hi");
+		new Thread(() -> {
+			for (;;) {
+				try {
+					String msg = messages.take();
+				} catch (Exception e) {
+					badNews(e.getMessage());
+				}
+
+			}
+		}).start();
 	}
-	
+
+	void badNews(String what) {
+		Alert badNum = new Alert(AlertType.ERROR);
+		badNum.setContentText(what);
+		badNum.show();
+	}
+
+	void send() {
+		try {
+			sendTo(users.getCurrentUser(currentUser.get(0)).get(6)  , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), "Kelsey");
+		} catch (NumberFormatException nfe) {
+			badNews(String.format("\"%s\" is not an integer", this.users.getCurrentUser(currentUser.get(0)).get(7)));
+		}
+	}
+
+	void sendTo(String host, int port, String message) {
+		new Thread(() -> {
+			try {
+				Socket target = new Socket(host, port);
+				send(target, message);
+				receive(target);
+				target.close();
+			} catch (Exception e) {
+				Platform.runLater(() -> badNews(e.getMessage()));
+				e.printStackTrace();
+			}
+		}).start();
+	}
+
+	void send(Socket target, String message) throws IOException {
+		PrintWriter sockout = new PrintWriter(target.getOutputStream());
+		sockout.println(message);
+		sockout.flush();
+	}
+
+	void receive(Socket target) throws IOException {
+		BufferedReader sockin = new BufferedReader(new InputStreamReader(target.getInputStream()));
+		while (!sockin.ready()) {}
+		while (sockin.ready()) {
+			try {
+				String msg = sockin.readLine();
+				messages.put(msg);
+			} catch (Exception e) {
+				Platform.runLater(() -> badNews(e.getMessage()));
+				e.printStackTrace();
+			}
+		}
+	}
+
 	@FXML
 	public void viewProfile(){
 		openProfile();
 	}
-	
+
 	public void openProfile(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -68,15 +137,23 @@ public class TimelineController {
 			Scene scene = new Scene(root);
 			secondStage.setScene(scene);
 			secondStage.show();
+
+
 		} catch (Exception exc) {
 			Alert r = new Alert(AlertType.NONE, "Cannot view Profile." , ButtonType.OK);
 			r.setTitle("ERROR");
 			r.showAndWait();
 			exc.printStackTrace();
 		}
+
 	}
-	
-	
+
+	@FXML
+	public void signOut(FXML timeline){
+		Stage stage = (Stage) ((Stage) timeline).getScene().getWindow();
+	    stage.close();
+	}
+
 	public void openEditProfile(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -85,7 +162,7 @@ public class TimelineController {
 
 			EditProfileController editProfile = (EditProfileController) loader.getController();
 			editProfile.importVariables(start, this);
-			editProfile.prePopulate((currentUser.get(0).equals("null"))?"":currentUser.get(0), 
+			editProfile.prePopulate((currentUser.get(0).equals("null"))?"":currentUser.get(0),
 					(currentUser.get(2).equals("null"))?"":currentUser.get(2),
 							(currentUser.get(3).equals("null"))?"":currentUser.get(3),
 									(currentUser.get(4).equals("null"))?"":currentUser.get(4), "");
@@ -121,14 +198,14 @@ public class TimelineController {
 			exc.printStackTrace();
 		}
 	}
-	
+
 	public void importVariables(StartController start, List<String> currentUser) {
 		this.start = start;
 		this.users = start.getUsers();
 		this.currentUser = currentUser;
 	}
-	
-	
+
+
 	/**
 	 * Adds Message into listview
 	 * @param  		String message
@@ -137,8 +214,15 @@ public class TimelineController {
 	public void addMessage(String msg) {
 		messageList.add(msg);
 		messageView.setItems(messageList);
+
+
+		try {
+			sendTo(users.getCurrentUser(currentUser.get(0)).get(6)  , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), "Kelsey");
+		} catch (NumberFormatException nfe) {
+			badNews(String.format("\"%s\" is not an integer", this.users.getCurrentUser(currentUser.get(0)).get(7)));
+		}
 	}
-	
+
 	public List<String> getCurrentUserInfo() {
 		return currentUser;
 	}
