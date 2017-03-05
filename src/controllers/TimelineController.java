@@ -215,9 +215,15 @@ public class TimelineController {
 		messageList.add(msg);
 		messageView.setItems(messageList);
 
+		while (!messages.isEmpty()){
+			String addmsg = messages.poll();
+			messageList.add(addmsg);
+		}
+
+
 
 		try {
-			sendTo(users.getCurrentUser(currentUser.get(0)).get(6)  , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), "Kelsey");
+			sendTo(/*users.getCurrentUser(currentUser.get(0)).get(6)*/ "10.253.202.151" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
 		} catch (NumberFormatException nfe) {
 			badNews(String.format("\"%s\" is not an integer", this.users.getCurrentUser(currentUser.get(0)).get(7)));
 		}
