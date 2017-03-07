@@ -239,7 +239,7 @@ public class TimelineController {
 
 		try {
 			sendTo("10.253.202.151" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
-			sendTo("10.253.193.153" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
+			sendTo("10.253.199.8" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
 		} catch (NumberFormatException nfe) {
 			badNews(String.format("\"%s\" is not an integer", this.users.getCurrentUser(currentUser.get(0)).get(7)));
 		}
