@@ -56,8 +56,8 @@ public class Server {
 	    }
 	    
 	    private void sendGreeting(PrintWriter writer) {
-            writer.println("Connection open.");
-            writer.println("I will echo a single message, then close.");	
+            //writer.println("Connection open.");
+           // writer.println("I will echo a single message, then close.");	
 	    }
 	    
 	    private void echoAndClose(PrintWriter writer, String msg) throws IOException {
