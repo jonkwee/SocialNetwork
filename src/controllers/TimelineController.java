@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -41,6 +42,7 @@ public class TimelineController {
 
 	ObservableList<String> messageList;
 	List<String> currentUser;
+	ArrayList<String> ips;
 
 	ArrayBlockingQueue<String> messages = new ArrayBlockingQueue<>(20);
 
@@ -213,10 +215,11 @@ public class TimelineController {
 		}
 	}
 
-	public void importVariables(StartController start, List<String> currentUser) {
+	public void importVariables(StartController start, List<String> currentUser, ArrayList<String> ips) {
 		this.start = start;
 		this.users = start.getUsers();
 		this.currentUser = currentUser;
+		this.ips = ips;
 	}
 
 
@@ -233,15 +236,11 @@ public class TimelineController {
 		// Because you're still technically a server if the program doesn't close and hit the red square
 		// It should close the program and call "system.exit(0);" to completely shut down everything in the GUI.
 		// This means that Kelsey needs to alter the requirements document.
-// TODO: Ask how to make it so you don't have to enter other people's IP addresses
-		// There needs to be another GUI that asks the user to enter the IP addresses of the people that they would like
-		// to message.
-		// Ferrer said that this means Kelsey needs to update the requirements document to literally have a use case
-		// that requires that the user obtain IP addresses from the people they want to communicate with
-		// and declare that our program finding the other users IP addresses is out of the scope for this assignment.
-		// (because it is not possible -- trust me I asked)
 
 		try {
+			//for(int i = 0; i < ips.length; i ++){
+			//	  sendTo(ips.get(i), Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
+			//}
 			sendTo("10.253.202.151" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
 			sendTo("10.253.203.83" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
 		} catch (NumberFormatException nfe) {

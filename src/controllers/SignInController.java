@@ -43,12 +43,42 @@ public class SignInController {
 			prompt.setText("Username or Password doesn't exist");
 		} else {
 			currentUser = users.getCurrentUser(currentUsername);
-			openTimeline();
+			openGetIP();
+			//openTimeline();
 		}
 	}
 
+	@FXML
+	public void openGetIP(){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(GuiMain.class.getResource("EnterIP.fxml"));
+			AnchorPane root = (AnchorPane)loader.load();
 
-	public void openTimeline(){
+			EnterIPController enterIP = (EnterIPController) loader.getController();
+			enterIP.importVariables(start, currentUser);
+
+			Stage secondStage = new Stage();
+			Scene scene = new Scene(root);
+
+			secondStage.setOnCloseRequest(e -> {
+			        Platform.exit();
+			        System.exit(0);
+			   });
+			Image anotherIcon = new Image("https://lh3.ggpht.com/am4rWpEvZqhjEMJoD4Imp-tdKxtQpsa6uel50xRHegrxtIybnDdT8spmvLOH9wPZiIs=w300");
+            secondStage.getIcons().add(anotherIcon);
+			//secondStage.getIcons().add(new Image(imgLink));
+		    secondStage.setTitle(currentUser.get(0));
+			secondStage.setScene(scene);
+			secondStage.show();
+		}catch (Exception exc) {
+			Alert r = new Alert(AlertType.NONE, "Cannot open the add users interface." , ButtonType.OK);
+			r.setTitle("ERROR");
+			r.showAndWait();
+			exc.printStackTrace();
+		}
+	}
+/*	public void openTimeline(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(GuiMain.class.getResource("TimelineVer2.fxml"));
@@ -60,12 +90,12 @@ public class SignInController {
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
-			
+
 			secondStage.setOnCloseRequest(e -> {
 			        Platform.exit();
 			        System.exit(0);
 			   });
-			
+
 			Image anotherIcon = new Image("https://lh3.ggpht.com/am4rWpEvZqhjEMJoD4Imp-tdKxtQpsa6uel50xRHegrxtIybnDdT8spmvLOH9wPZiIs=w300");
             secondStage.getIcons().add(anotherIcon);
 			//secondStage.getIcons().add(new Image(imgLink));
@@ -81,7 +111,7 @@ public class SignInController {
 
 		Stage stage = (Stage) signIn.getScene().getWindow();
 	    stage.close();
-	}
+	}*/
 
 	@FXML
 	void close() {
