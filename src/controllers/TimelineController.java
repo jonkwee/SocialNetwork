@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 import java.util.Optional;
@@ -35,36 +36,16 @@ public class TimelineController {
 
 	StartController start;
 	Users users;
+	private ServerSocket accepter;
 
 	@FXML
 	ListView<String> messageView;
 
-	ObservableList<String> messageList;
 	List<String> currentUser;
-
-	ArrayBlockingQueue<String> messages = new ArrayBlockingQueue<>(20);
 
 
 	@FXML
 	public void initialize(){
-		messageList = FXCollections.observableArrayList();
-		new Thread(() -> {
-			for (;;) {
-				try {
-					String msg = messages.take();
-					Platform.runLater(() -> {
-						Message current = new Message(msg, currentUser.get(0));
-						addMessage(current.toString());
-						messageList.add(current.toString());
-						messageView.setItems(messageList);
-						//addMessage(msg);
-					});
-				} catch (Exception e) {
-					badNews(e.getMessage());
-				}
-
-			}
-		}).start();
 	}
 
 	void badNews(String what) {
@@ -81,13 +62,25 @@ public class TimelineController {
 		}
 	}
 
-	void sendTo(String host, int port, String message) {
+	/*void sendTo(String host, int port, String message) {
 		new Thread(() -> {
 			try {
 				Socket target = new Socket(host, port);
 				send(target, message);
 				receive(target);
 				target.close();
+			} catch (Exception e) {
+				Platform.runLater(() -> badNews(e.getMessage()));
+				e.printStackTrace();
+			}
+		}).start();
+	}*/
+	
+	void sendTo(String host, int port, String message) {
+		new Thread(() -> {
+			try {
+				Socket target = new Socket(host, port);
+				receive(target);
 			} catch (Exception e) {
 				Platform.runLater(() -> badNews(e.getMessage()));
 				e.printStackTrace();
@@ -100,6 +93,15 @@ public class TimelineController {
 		sockout.println(message);
 		sockout.flush();
 	}
+	
+	public void listen() throws IOException {
+		for (;;) {
+			Socket s = accepter.accept();
+			SocketEchoThread echoer = new SocketEchoThread(s);
+			System.out.println("Server: Connection accepted from " + s.getInetAddress());
+			echoer.start();
+		}
+	}
 
 	void receive(Socket target) throws IOException {
 		BufferedReader sockin = new BufferedReader(new InputStreamReader(target.getInputStream()));
@@ -107,7 +109,14 @@ public class TimelineController {
 		while (sockin.ready()) {
 			try {
 				String msg = sockin.readLine();
-				messages.put(msg);
+				System.out.println("Received: [" + msg + "]");
+				System.out.println("Okay, I really got it.");
+				Platform.runLater(() -> {
+					System.out.println("Running later on Platform");
+					messageView.getItems().add(msg);
+					System.out.println("Going to ListView: " + msg);
+				});
+				System.out.println("Told platform to run later");
 			} catch (Exception e) {
 				Platform.runLater(() -> badNews(e.getMessage()));
 				e.printStackTrace();
@@ -242,6 +251,7 @@ public class TimelineController {
 		// (because it is not possible -- trust me I asked)
 
 		try {
+			System.out.println("In addMessage()");
 			sendTo("10.253.202.151" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
 			sendTo("10.253.203.83" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
 		} catch (NumberFormatException nfe) {
@@ -253,5 +263,25 @@ public class TimelineController {
 
 	public List<String> getCurrentUserInfo() {
 		return currentUser;
+	}
+	
+	
+	
+	
+	private class SocketEchoThread extends Thread {
+	    private Socket socket;
+	    
+	    public SocketEchoThread(Socket socket) {
+	        this.socket = socket;
+	    }
+
+	    public void run() {
+	        try {
+	            PrintWriter writer = new PrintWriter(socket.getOutputStream());
+	            //System.out.println("Server: Received [" + msg + "]");
+	        } catch (IOException ioe) {
+	            ioe.printStackTrace();
+	        } 
+	    }
 	}
 }

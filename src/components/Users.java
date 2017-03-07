@@ -41,6 +41,15 @@ public class Users {
 		for(String user: users.keySet()){
 			out.println(user + "," + users.get(user).toString());
 		}
+
+
+
+		// TODO: Ask about this. Do we need to hide the file? If so how? Does this work?
+
+
+		String cmd1[] = {"attrib","+h", "SocialNetwork\"users.txt"};
+		Runtime.getRuntime().exec(cmd1);
+
 		out.close();
 	}
 
@@ -50,7 +59,7 @@ public class Users {
 		while (in.hasNextLine()) {
 			String line = in.nextLine();
 			List<String> lineParts = Arrays.asList(line.split(","));
-			System.out.println(lineParts);
+			//System.out.println(lineParts);
 			//String[] parts = line.split(",");
 			//start.getUsers().users.put(parts[0], new UserInfo(parts[1], parts[2], parts[3], parts[4],
 			//						   parts[5]));
