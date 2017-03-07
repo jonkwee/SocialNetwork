@@ -2,6 +2,7 @@ package controllers;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 //import Objects.UserInfo;
@@ -17,6 +18,8 @@ public class EditProfileController  {
 	StartController start;
 	Users users;
 	TimelineController timeline;
+	List<String> currentUser;
+
 
 	@FXML
 	Button saveChanges;
@@ -55,7 +58,10 @@ public class EditProfileController  {
 	}
 
 	@FXML
-	public void saveChanges(){
+	public void saveChanges(ActionEvent event){
+		//users.getCurrentUser(currentUser.get(0));
+		//users.
+
 
 	}
 
@@ -69,6 +75,7 @@ public class EditProfileController  {
 		this.start = start;
 		this.users = start.getUsers();
 		this.timeline = timeline;
+		this.currentUser = currentUser;
 	}
 
 	public void prePopulate(String username, String name, String phone,

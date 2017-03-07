@@ -72,8 +72,8 @@ public class CreateAccountController {
 		String currentPhone = (phone.getText().equals(""))?"null":phone.getText();
 		String currentEmail = (email.getText().equals(""))?"null":email.getText();
 		String currentBirthday = (birthday.getValue() == null)?"null":"" + birthday.getValue();
-		String currentHost = (host.getText().equals(""))?"null":name.getText();
-		String currentPort = (port.getText().equals(""))?"null":name.getText();
+		String currentHost = "255.255.255.255";
+		String currentPort = "8880";
 		if (requiredNotFilled(currentUsername, currentPassword, currentConfirmPass)) {
 			prompt.setText("Please fill in the required fields!");
 		} else if (users.checkUserName(currentUsername)) {
@@ -88,8 +88,8 @@ public class CreateAccountController {
 			System.out.println(phone.getText());
 			System.out.println(email.getText());
 			System.out.println(birthday.getValue());
-			System.out.println(host.getText());
-			System.out.println(port.getText());
+			System.out.println("255.255.255.255");
+			System.out.println("8880");
 			users.add(currentUsername, currentPassword, currentName, currentPhone,
 					  currentEmail, currentBirthday, currentHost, currentPort);
 			openSignIn();
