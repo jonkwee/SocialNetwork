@@ -4,11 +4,13 @@ import java.io.FileNotFoundException;
 
 //import project2.AddActivityController;
 import components.Users;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -47,6 +49,15 @@ public class StartController {
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
+			
+			secondStage.setOnCloseRequest(e -> {
+			        Platform.exit();
+			        System.exit(0);
+			    });
+			
+			Image anotherIcon = new Image("https://lh3.ggpht.com/am4rWpEvZqhjEMJoD4Imp-tdKxtQpsa6uel50xRHegrxtIybnDdT8spmvLOH9wPZiIs=w300");
+			secondStage.getIcons().add(anotherIcon);
+		    secondStage.setTitle("Welcome to Bubble!");
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (Exception exc) {
@@ -68,6 +79,15 @@ public class StartController {
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
+			
+			secondStage.setOnCloseRequest(e -> {
+			        Platform.exit();
+			        System.exit(0);
+			    });
+			
+			Image anotherIcon = new Image("https://lh3.ggpht.com/am4rWpEvZqhjEMJoD4Imp-tdKxtQpsa6uel50xRHegrxtIybnDdT8spmvLOH9wPZiIs=w300");
+			secondStage.getIcons().add(anotherIcon);
+		    secondStage.setTitle("Welcome to Bubble!");
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (Exception exc) {

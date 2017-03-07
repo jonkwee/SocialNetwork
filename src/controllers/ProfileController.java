@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -43,11 +44,7 @@ public class ProfileController  {
 	StartController start;
 	Users users;
 	TimelineController timeline;
-
-	//UserInfo example = new UserInfo("password", "First Last", "123-456-7890" , "example@hendrix.edu", LocalDate.now());
-			//"Hello! My name is Taylor. This is my profile.");
-					//, getProfilePic() );
-
+	List<String> currentUser;
 
 
 	@FXML
@@ -61,7 +58,7 @@ public class ProfileController  {
 		//biography.setText(currentUser.getBiography());
 		//profilePic.setImage(getProfilePic());
 	}
-	
+
 	public void setProfile(String name, String birthday, String email, String phoneNumber) {
 		this.name.setText(name);
 		this.birthday.setText("Birthday: " + birthday);
@@ -79,13 +76,15 @@ public class ProfileController  {
 
 			EditProfileController editProfile = (EditProfileController) loader.getController();
 			editProfile.importVariables(start, timeline);
-			editProfile.prePopulate((timeline.currentUser.get(0).equals("null"))?"":timeline.currentUser.get(0), 
+			editProfile.prePopulate((timeline.currentUser.get(0).equals("null"))?"":timeline.currentUser.get(0),
 					(timeline.currentUser.get(2).equals("null"))?"":timeline.currentUser.get(2),
 							(timeline.currentUser.get(3).equals("null"))?"":timeline.currentUser.get(3),
 									(timeline.currentUser.get(4).equals("null"))?"":timeline.currentUser.get(4), "");
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
+			Image anotherIcon = new Image("https://lh3.ggpht.com/am4rWpEvZqhjEMJoD4Imp-tdKxtQpsa6uel50xRHegrxtIybnDdT8spmvLOH9wPZiIs=w300");
+			secondStage.getIcons().add(anotherIcon);
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (Exception exc) {
@@ -105,6 +104,7 @@ public class ProfileController  {
 		this.start = start;
 		this.users = start.getUsers();
 		this.timeline = timeline;
+		this.currentUser = currentUser;
 	}
 
 

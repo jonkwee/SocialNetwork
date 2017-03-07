@@ -26,6 +26,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -130,6 +131,9 @@ public class TimelineController {
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
+			Image anotherIcon = new Image("https://lh3.ggpht.com/am4rWpEvZqhjEMJoD4Imp-tdKxtQpsa6uel50xRHegrxtIybnDdT8spmvLOH9wPZiIs=w300");
+			secondStage.getIcons().add(anotherIcon);
+		    secondStage.setTitle(currentUser.get(0));
 			secondStage.setScene(scene);
 			secondStage.show();
 
@@ -173,6 +177,8 @@ public class TimelineController {
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
+			Image anotherIcon = new Image("https://lh3.ggpht.com/am4rWpEvZqhjEMJoD4Imp-tdKxtQpsa6uel50xRHegrxtIybnDdT8spmvLOH9wPZiIs=w300");
+			secondStage.getIcons().add(anotherIcon);
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (Exception exc) {
