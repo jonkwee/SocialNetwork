@@ -90,19 +90,19 @@ public class Users {
 	public List<String> getCurrentUser(String username) {
 		UserInfo info = users.get(username);
 		List<String> userInfoList = Arrays.asList((username + "," + info.toString()).split(",")); //(username + "," + info.toString()).split(",")
-		System.out.println(userInfoList);
+		//System.out.println(userInfoList);
 		return userInfoList;
 	}
 
 	public void printKeys() {
 		for (String key: users.keySet()) {
-			System.out.println(key);
+			//System.out.println(key);
 			printValues(key);
 		}
 	}
 
 	public void printValues(String key) {
 		UserInfo info = users.get(key);
-		System.out.println(info.toString());
+		//System.out.println(info.toString());
 	}
 }

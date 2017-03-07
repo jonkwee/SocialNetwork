@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import com.sun.corba.se.spi.activation.Server;
@@ -33,15 +34,6 @@ public class TimelineController {
 	StartController start;
 	Users users;
 
-	/*@FXML
-	Menu myProfile;
-
-	@FXML
-	MenuBar profileItems;*/
-
-	//@FXML
-	//Button myProfile;
-
 	@FXML
 	ListView<String> messageView;
 
@@ -54,11 +46,14 @@ public class TimelineController {
 	@FXML
 	public void initialize(){
 		messageList = FXCollections.observableArrayList();
-		System.out.println(messageList.equals(null));
+		//System.out.println(messageList.equals(null));
 		new Thread(() -> {
 			for (;;) {
 				try {
 					String msg = messages.take();
+					Platform.runLater(() -> {
+						messageList.add(msg);
+					});
 				} catch (Exception e) {
 					badNews(e.getMessage());
 				}
@@ -149,9 +144,18 @@ public class TimelineController {
 	}
 
 	@FXML
-	public void signOut(FXML timeline){
-		Stage stage = (Stage) ((Stage) timeline).getScene().getWindow();
-	    stage.close();
+	public void signOut(){
+		Alert r = new Alert(AlertType.NONE,
+				"You are about to sign out.\nThis will completely close the program. \nDo you wish to continue?" ,
+				ButtonType.YES, ButtonType.CANCEL);
+		r.setTitle("Sign Out?");
+
+		Optional<ButtonType> result = r.showAndWait();
+		if (result.get() == ButtonType.YES){
+			System.exit(0);
+		} else {
+		   r.close();
+		}
 	}
 
 	public void openEditProfile(){
@@ -215,18 +219,25 @@ public class TimelineController {
 		messageList.add(msg);
 		messageView.setItems(messageList);
 
+// TODO: When someone logs out, should it close the program or should it take them back to the sign in page?
+		// Because you're still technically a server if the program doesn't close and hit the red square
+		// It should close the program and call "system.exit(0);" to completely shut down everything in the GUI.
+		// This means that Kelsey needs to alter the requirements document.
+// TODO: Ask how to make it so you don't have to enter other people's IP addresses
+		// There needs to be another GUI that asks the user to enter the IP addresses of the people that they would like
+		// to message.
+		// Ferrer said that this means Kelsey needs to update the requirements document to literally have a use case
+		// that requires that the user obtain IP addresses from the people they want to communicate with
+		// and declare that our program finding the other users IP addresses is out of the scope for this assignment.
+		// (because it is not possible -- trust me I asked)
 
 		try {
-			sendTo(/*users.getCurrentUser(currentUser.get(0)).get(6)*/ "10.253.202.151" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
-			sendTo(/*users.getCurrentUser(currentUser.get(0)).get(6)*/ "10.253.199.8" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
+			sendTo("10.253.202.151" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
+			sendTo("10.253.193.153" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
 		} catch (NumberFormatException nfe) {
 			badNews(String.format("\"%s\" is not an integer", this.users.getCurrentUser(currentUser.get(0)).get(7)));
 		}
 
-		while (!messages.isEmpty()){
-			String addmsg = messages.poll();
-			messageList.add(addmsg);
-		}
 
 	}
 

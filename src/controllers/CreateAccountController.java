@@ -50,65 +50,8 @@ public class CreateAccountController {
 
 	@FXML
 	public void initialize(){
-		/*new Thread(() -> {
-			for (;;) {
-				try {
-					String msg = messages.take();
-				} catch (Exception e) {
-					badNews(e.getMessage());
-				}
-
-			}
-		}).start();*/
 	}
 
-/*	void badNews(String what) {
-		Alert badNum = new Alert(AlertType.ERROR);
-		badNum.setContentText(what);
-		badNum.show();
-	}
-
-	void send() {
-		try {
-			sendTo(host.getText(), Integer.parseInt(this.port.getText()), null);
-		} catch (NumberFormatException nfe) {
-			badNews(String.format("\"%s\" is not an integer", this.port.getText()));
-		}
-	}
-
-	void sendTo(String host, int port, String message) {
-		new Thread(() -> {
-			try {
-				Socket target = new Socket(host, port);
-				send(target, message);
-				receive(target);
-				target.close();
-			} catch (Exception e) {
-				Platform.runLater(() -> badNews(e.getMessage()));
-				e.printStackTrace();
-			}
-		}).start();
-	}
-
-	void send(Socket target, String message) throws IOException {
-		PrintWriter sockout = new PrintWriter(target.getOutputStream());
-		sockout.println(message);
-		sockout.flush();
-	}
-
-	void receive(Socket target) throws IOException {
-		BufferedReader sockin = new BufferedReader(new InputStreamReader(target.getInputStream()));
-		while (!sockin.ready()) {}
-		while (sockin.ready()) {
-			try {
-				String msg = sockin.readLine();
-				messages.put(msg);
-			} catch (Exception e) {
-				Platform.runLater(() -> badNews(e.getMessage()));
-				e.printStackTrace();
-			}
-		}
-	}*/
 
 	public void getStart(StartController start){
 		this.start = start;

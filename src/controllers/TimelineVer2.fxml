@@ -26,7 +26,7 @@
                            <items>
                               <MenuItem mnemonicParsing="false" onAction="#viewProfile" text="View" />
                               <MenuItem mnemonicParsing="false" onAction="#openEditProfile" text="Edit" />
-                              <MenuItem mnemonicParsing="false" text="Log Out" />
+                              <MenuItem mnemonicParsing="false" onAction="#signOut" text="Log Out" />
                            </items>
                         </Menu>
                     </menus>
