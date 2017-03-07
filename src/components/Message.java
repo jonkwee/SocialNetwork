@@ -8,7 +8,7 @@ public class Message implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Message [body=" + body + ", name=" + name + "]";
+		return name + ": " + body;
 	}
 	@Override
 	public int hashCode() {
@@ -58,6 +58,6 @@ public class Message implements Serializable {
 	}
 	private String body;
 	private String name;
-	
+
 
 }

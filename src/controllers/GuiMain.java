@@ -21,7 +21,6 @@ public class GuiMain extends Application{
         primaryStage.getIcons().add(anotherIcon);
 	    primaryStage.setTitle("Welcome to Bubble!");
 
-
 	    // This completely shuts down the server when the user clicks close
 	    primaryStage.setOnCloseRequest(e -> {
 	        Platform.exit();

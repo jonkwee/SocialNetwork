@@ -48,14 +48,16 @@ public class TimelineController {
 	@FXML
 	public void initialize(){
 		messageList = FXCollections.observableArrayList();
-		//System.out.println(messageList.equals(null));
 		new Thread(() -> {
 			for (;;) {
 				try {
 					String msg = messages.take();
 					Platform.runLater(() -> {
 						Message current = new Message(msg, currentUser.get(0));
+						addMessage(current.toString());
 						messageList.add(current.toString());
+						messageView.setItems(messageList);
+						//addMessage(msg);
 					});
 				} catch (Exception e) {
 					badNews(e.getMessage());
@@ -224,8 +226,8 @@ public class TimelineController {
 	 * @return      None
 	 */
 	public void addMessage(String msg) {
-		messageList.add(msg);
-		messageView.setItems(messageList);
+		//messageList.add(msg);
+		//messageView.setItems(messageList);
 
 // TODO: When someone logs out, should it close the program or should it take them back to the sign in page?
 		// Because you're still technically a server if the program doesn't close and hit the red square
@@ -240,8 +242,8 @@ public class TimelineController {
 		// (because it is not possible -- trust me I asked)
 
 		try {
-			sendTo("10.253.193.153" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
-			sendTo("10.253.199.8" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
+			sendTo("10.253.202.151" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
+			sendTo("10.253.203.83" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
 		} catch (NumberFormatException nfe) {
 			badNews(String.format("\"%s\" is not an integer", this.users.getCurrentUser(currentUser.get(0)).get(7)));
 		}

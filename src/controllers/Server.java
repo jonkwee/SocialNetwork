@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class Server {
 
-	public static void main(String[] args) throws IOException {
+	/*public static void main(String[] args) throws IOException {
 		Thread serverThread = new Thread(() -> {
 			try{ 
 				Server s = new Server(Integer.parseInt(args[0]));
@@ -19,7 +19,7 @@ public class Server {
 			}
 			});
 		}
-	
+	*/
 	private ServerSocket accepter;
 
 	public Server(int port) throws IOException {
