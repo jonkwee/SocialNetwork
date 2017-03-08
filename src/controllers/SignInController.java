@@ -1,5 +1,8 @@
 package controllers;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,8 +35,27 @@ public class SignInController {
 	List<String> currentUser;
 
 	@FXML
-	public void initialize(){}
+	public void initialize(){
+	}
 
+	public void deserialize() {
+		System.out.println("Deserializing in SignIn");
+		 try {
+	         FileInputStream fileIn = new FileInputStream("users.ser");
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         start.setUsers((Users) in.readObject());
+	         users = start.getUsers();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i) {
+	         i.printStackTrace();
+	         return;
+	      }catch(ClassNotFoundException c) {
+	         System.out.println("UserObs class not found");
+	         c.printStackTrace();
+	         return;
+	      }
+	}
 	@FXML
 	public void signIn(){
 		String currentUsername = username.getText();
@@ -51,9 +73,11 @@ public class SignInController {
 	@FXML
 	public void openGetIP(){
 		try{
+	
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(GuiMain.class.getResource("EnterIP.fxml"));
 			AnchorPane root = (AnchorPane)loader.load();
+			
 
 			EnterIPController enterIP = (EnterIPController) loader.getController();
 			enterIP.importVariables(start, currentUser);

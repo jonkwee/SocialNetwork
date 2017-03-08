@@ -3,8 +3,9 @@ package components;
 import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.io.Serializable;
 
-public class UserInfo {
+public class UserInfo implements Serializable {
 	private String password, name, phone, email, biography, bday, host, port;
 	private Object avatar;
 

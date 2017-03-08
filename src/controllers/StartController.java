@@ -1,6 +1,10 @@
 package controllers;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.Hashtable;
 
 //import project2.AddActivityController;
 import components.Users;
@@ -26,17 +30,33 @@ public class StartController {
 	@FXML
 	public void initialize(){
 		users = new Users();
-		try {
-			addExistingUsers();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		deserialize();
+		//addExistingUsers();
 	}
 
 	@FXML
 	public void addExistingUsers() throws FileNotFoundException{
 		users.readFromUserFile(this);
 	}
+	
+	public void deserialize() {
+		System.out.println("Deserializing in Start");
+		 try {
+	         FileInputStream fileIn = new FileInputStream("users.ser");
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         users = (Users) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i) {
+	         i.printStackTrace();
+	         return;
+	      }catch(ClassNotFoundException c) {
+	         System.out.println("UserObs class not found");
+	         c.printStackTrace();
+	         return;
+	      }
+	}
+	
 	@FXML
 	public void openSignIn(){
 		try {
@@ -46,6 +66,7 @@ public class StartController {
 
 			SignInController signIn = (SignInController)loader.getController();
 			signIn.importVariables(this);
+			signIn.deserialize();
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);
@@ -61,6 +82,7 @@ public class StartController {
 			secondStage.setScene(scene);
 			secondStage.show();
 		} catch (Exception exc) {
+			exc.printStackTrace();
 			Alert r = new Alert(AlertType.NONE, "Cannot open Sign In page." , ButtonType.OK);
 			r.setTitle("ERROR");
 			r.showAndWait();
@@ -101,5 +123,8 @@ public class StartController {
 	public Users getUsers() {
 		return users;
 	}
-
+	
+	public void setUsers(Users newUsers) {
+		users = newUsers;
+	}
 }

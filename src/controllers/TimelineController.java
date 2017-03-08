@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -229,6 +230,9 @@ public class TimelineController {
 		this.users = start.getUsers();
 		this.currentUser = currentUser;
 		this.ips = ips;
+		
+		// remove possible empty strings
+		this.ips.removeAll(Collections.singleton(""));
 	}
 
 
@@ -248,10 +252,10 @@ public class TimelineController {
 
 		try {
 
-			//for(int i = 0; i < ips.length; i ++){
-			//	  sendTo(ips.get(i), Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
-			//}
-			//System.out.println("In addMessage()");
+//			for(int i = 0; i < ips.size(); i ++){
+//				sendTo(ips.get(i), Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
+//			}
+//			System.out.println("In addMessage()");
 
 			sendTo("10.253.202.151" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);
 			sendTo("10.253.203.83" , Integer.parseInt(this.users.getCurrentUser(currentUser.get(0)).get(7)), msg);

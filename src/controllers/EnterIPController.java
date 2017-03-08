@@ -35,7 +35,7 @@ public class EnterIPController {
 	StartController start;
 	Users users;
 	List<String> currentUser;
-	ArrayList<String> ips;
+	ArrayList<String> ips = new ArrayList<String>();;
 
 	public void importVariables(StartController start, List<String> currentUser) {
 		this.start = start;
@@ -50,6 +50,7 @@ public class EnterIPController {
 			// check if the entered field is in the correct format
 			if (checkIPInput(friend1.getText()) && checkIPInput(friend2.getText()) && checkIPInput(friend3.getText()) && checkIPInput(friend4.getText())) {
 				// possible empty string will be added into ArrayList. Remember to filter out when taking ip out of ArrayList.
+
 				ips.add(friend1.getText());
 				ips.add(friend2.getText());
 				ips.add(friend3.getText());
@@ -84,8 +85,8 @@ public class EnterIPController {
 			return false;
 		}
 		
-		if (ipSplit[0].length() > 4 || ipSplit[1].length() > 4 || ipSplit[2].length() > 4 || ipSplit[3].length() > 4) {
-			prompt.setText("Max length of each segment is 4!");
+		if (ipSplit[0].length() > 3 || ipSplit[1].length() > 3 || ipSplit[2].length() > 3 || ipSplit[3].length() > 3) {
+			prompt.setText("Max length of each segment is 3!");
 			return false;
 		}
 		
@@ -99,6 +100,7 @@ public class EnterIPController {
 	}
 
 	public void openTimeline(){
+		System.out.println("HERE");
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(GuiMain.class.getResource("TimelineVer2.fxml"));

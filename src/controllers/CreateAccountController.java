@@ -1,12 +1,16 @@
 package controllers;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Optional;
 import java.util.concurrent.ArrayBlockingQueue;
+
 
 import components.Users;
 import javafx.application.Platform;
@@ -81,21 +85,36 @@ public class CreateAccountController {
 		} else if (!checkPassWordConfirmation(currentPassword, currentConfirmPass)) {
 			prompt.setText("Password and Confirm Password fields are different.");
 		} else {
-			System.out.println(users);
-			System.out.println(username.getText());
-			System.out.println(password.getText());
-			System.out.println(name.getText());
-			System.out.println(phone.getText());
-			System.out.println(email.getText());
-			System.out.println(birthday.getValue());
-			System.out.println("255.255.255.255");
-			System.out.println("8880");
+//			System.out.println(users);
+//			System.out.println(username.getText());
+//			System.out.println(password.getText());
+//			System.out.println(name.getText());
+//			System.out.println(phone.getText());
+//			System.out.println(email.getText());
+//			System.out.println(birthday.getValue());
+//			System.out.println("255.255.255.255");
+//			System.out.println("8880");
 			users.add(currentUsername, currentPassword, currentName, currentPhone,
 					  currentEmail, currentBirthday, currentHost, currentPort);
+			serialize(users);
 			openSignIn();
 		}
 		} catch (Exception exc) {
 			exc.printStackTrace();
+		}
+	}
+	
+	// Serialize UserOb object
+	public void serialize(Users user) {
+		System.out.println("Serializing");
+		try {
+			FileOutputStream fileOut = new FileOutputStream("users.ser", false);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	        out.writeObject(user);
+	        out.close();
+	        fileOut.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -127,6 +146,7 @@ public class CreateAccountController {
 
 			SignInController signIn = (SignInController) loader.getController();
 			signIn.importVariables(start);
+			signIn.deserialize();
 
 			Stage secondStage = new Stage();
 			Scene scene = new Scene(root);

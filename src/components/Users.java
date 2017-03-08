@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Hashtable;
@@ -12,7 +13,11 @@ import java.util.Scanner;
 
 import controllers.StartController;
 
-public class Users {
+public class Users implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Hashtable<String, UserInfo> users = new Hashtable<String, UserInfo>();
 
 	/**
@@ -30,7 +35,7 @@ public class Users {
 		for(String user: users.keySet()){System.out.println(user + users.get(user).toString());}
 		users.put(username, new UserInfo(password, name, phone, email, bday /*biography*/, host, port));
 		for(String user: users.keySet()){System.out.println(user + users.get(user).toString());}
-		writeToUserFile();
+		//(serialize change) writeToUserFile();
 	}
 
 	/**
