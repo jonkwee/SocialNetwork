@@ -29,6 +29,8 @@ public class EnterIPController {
 	Button connect;
 	@FXML
 	Button cancel;
+	@FXML
+	Label prompt;
 
 	StartController start;
 	Users users;
@@ -43,11 +45,57 @@ public class EnterIPController {
 
 	@FXML
 	public void addUsers(){
-		if(!friend1.getText().equals(null)) ips.add(friend1.getText());
-		if(!friend2.getText().equals(null)) ips.add(friend2.getText());
-		if(!friend3.getText().equals(null)) ips.add(friend3.getText());
-		if(!friend4.getText().equals(null)) ips.add(friend4.getText());
-		openTimeline();
+		// check if at least one field is entered
+		if (!friend1.getText().equals("") || !friend2.getText().equals("") || !friend3.getText().equals("") || !friend4.getText().equals("")) {
+			// check if the entered field is in the correct format
+			if (checkIPInput(friend1.getText()) && checkIPInput(friend2.getText()) && checkIPInput(friend3.getText()) && checkIPInput(friend4.getText())) {
+				// possible empty string will be added into ArrayList. Remember to filter out when taking ip out of ArrayList.
+				ips.add(friend1.getText());
+				ips.add(friend2.getText());
+				ips.add(friend3.getText());
+				ips.add(friend4.getText());
+				openTimeline();
+			}
+		} else {
+			prompt.setText("Please key in at least one IP Address!");
+		}
+
+	}
+	
+	// check IP input to see if it is the correct format
+	public boolean checkIPInput(String ipInput) {
+		String[] ipSplit = ipInput.split("\\.");
+		
+		// if empty string, then return true since it is not required to fill all four text fields. 
+		// We check in the addUsers() function for at least one input. 
+		if (ipInput.equals("")) {
+			return true;
+		}
+		
+		// if user enters a format that is not #.#.#.#
+		if (ipSplit.length != 4) {
+			prompt.setText("Please key in a correct IP Address including periods");
+			return false;
+		}
+		
+		// if a single segment of the ip address is not made out of number
+		if (!isNumeric(ipSplit[0]) || !isNumeric(ipSplit[1]) || !isNumeric(ipSplit[2]) || !isNumeric(ipSplit[3])) {
+			prompt.setText("Please key in an IP Address with all numbers (IPv4)");
+			return false;
+		}
+		
+		if (ipSplit[0].length() > 4 || ipSplit[1].length() > 4 || ipSplit[2].length() > 4 || ipSplit[3].length() > 4) {
+			prompt.setText("Max length of each segment is 4!");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	// check if string is numeric
+	public boolean isNumeric(String str)
+	{
+	  return str.matches("-?\\d+(\\.\\d+)?"); 
 	}
 
 	public void openTimeline(){
