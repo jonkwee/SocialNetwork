@@ -269,6 +269,10 @@ public class TimelineController {
 	public List<String> getCurrentUserInfo() {
 		return currentUser;
 	}
+	
+	public void setCurrentUserInfo() {
+		currentUser = users.getCurrentUser(currentUser.get(0)); 
+	}
 
 
 

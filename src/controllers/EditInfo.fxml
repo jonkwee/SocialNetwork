@@ -25,7 +25,7 @@
          </font>
       </Text>
       <PasswordField fx:id="password" layoutX="99.0" layoutY="103.0" prefHeight="25.0" prefWidth="115.0" />
-      <Button fx:id="saveChanges" layoutX="121.0" layoutY="344.0" mnemonicParsing="false" text="Save Changes" />
+      <Button fx:id="saveChanges" layoutX="121.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveChanges" text="Save Changes" />
       <Button fx:id="cancel" layoutX="271.0" layoutY="343.0" mnemonicParsing="false" onAction="#closeEdit" text="Cancel" />
       <TextField fx:id="name" layoutX="282.0" layoutY="66.0" prefHeight="25.0" prefWidth="130.0" promptText="John Smith" />
       <Text layoutX="233.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">

@@ -39,7 +39,7 @@
       <TextField fx:id="friend3" layoutX="197.0" layoutY="147.0" promptText="10.253.202.151" />
       <TextField fx:id="friend4" layoutX="197.0" layoutY="182.0" promptText="10.253.599.265" />
       <Button fx:id="connect" layoutX="250.0" layoutY="239.0" mnemonicParsing="false" onAction="#addUsers" text="Connect to Users" />
-      <Button fx:id="cancel" layoutX="59.0" layoutY="239.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="cancel" layoutX="59.0" layoutY="239.0" mnemonicParsing="false" onAction="#close" text="Cancel" />
       <Label fx:id="prompt" alignment="CENTER" layoutX="6.0" layoutY="46.0" prefHeight="21.0" prefWidth="404.0" />
    </children>
 </AnchorPane>

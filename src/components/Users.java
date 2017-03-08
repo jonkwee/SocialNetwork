@@ -107,6 +107,10 @@ public class Users implements Serializable{
 		//System.out.println(userInfoList);
 		return userInfoList;
 	}
+	
+	public UserInfo getCurrentUserInfo(String username) {
+		return users.get(username);
+	}
 
 	public void printKeys() {
 		for (String key: users.keySet()) {

@@ -87,6 +87,8 @@ public class ProfileController  {
 			secondStage.getIcons().add(anotherIcon);
 			secondStage.setScene(scene);
 			secondStage.show();
+			
+			closeProfile();
 		} catch (Exception exc) {
 			Alert r = new Alert(AlertType.NONE, "Cannot open the edit page." , ButtonType.OK);
 			r.setTitle("ERROR");
@@ -107,6 +109,10 @@ public class ProfileController  {
 		this.currentUser = currentUser;
 	}
 
+	public void closeProfile() {
+	    Stage stage = (Stage) edit.getScene().getWindow();
+	    stage.close();
+	}
 
 }
 

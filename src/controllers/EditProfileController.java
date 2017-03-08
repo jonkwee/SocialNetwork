@@ -1,6 +1,9 @@
 package controllers;
 
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -58,15 +61,43 @@ public class EditProfileController  {
 	}
 
 	@FXML
-	public void saveChanges(ActionEvent event){
-		//users.getCurrentUser(currentUser.get(0));
-		//users.
+	public void saveChanges(){
+		// get UserInfo
+		UserInfo currentUserInfo = users.getCurrentUserInfo(username.getText());
+		currentUserInfo.setName((name.getText().equals(""))?"null":name.getText());
+		if (birthday.getValue() != null) {
+			currentUserInfo.setBday("" + birthday.getValue());
+		}
+		//currentUserInfo.setBday((birthday.getValue() == null)?:"" + birthday.getValue());
+		currentUserInfo.setPhone((phone.getText().equals(""))?"null":phone.getText());
+		currentUserInfo.setEmail((email.getText().equals(""))?"null":email.getText());
+		// if password field = confirm password field and when the user did not leave it blank.
+		// when user leaves field blank, should not change password to empty string.
+		if (password.getText().equals(confirmPass) && !password.getText().equals("")) {
+			currentUserInfo.setPassword(password.getText());
+		}
+		timeline.setCurrentUserInfo();
+		
+		serialize(users);
+		closeEdit();
 
-
+	}
+	
+	public void serialize(Users user) {
+		System.out.println("Serializing in EditProfile");
+		try {
+			FileOutputStream fileOut = new FileOutputStream("users.ser", false);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	        out.writeObject(user);
+	        out.close();
+	        fileOut.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
-	public void closeEdit(ActionEvent event) {
+	public void closeEdit() {
 	    Stage stage = (Stage) cancel.getScene().getWindow();
 	    stage.close();
 	}
@@ -75,7 +106,6 @@ public class EditProfileController  {
 		this.start = start;
 		this.users = start.getUsers();
 		this.timeline = timeline;
-		this.currentUser = currentUser;
 	}
 
 	public void prePopulate(String username, String name, String phone,
@@ -86,6 +116,8 @@ public class EditProfileController  {
 		this.email.setText(email);
 		this.bio.setText(bio);
 	}
+	
+	
 
 
 
